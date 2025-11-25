@@ -4,6 +4,8 @@ import asyncio
 import json
 import logging
 
+from datetime import datetime
+
 from automation_server_client import Workqueue
 
 from helpers import config
@@ -15,6 +17,18 @@ def retrieve_items_for_queue() -> list[dict]:
     """Function to populate queue"""
     data = []
     references = []
+
+    execute_date = datetime.today().date().isoformat()
+
+    logger.info(f"Execute date: {execute_date}")
+
+    meta_data = {
+        "execute_date": execute_date
+    }
+
+    data.append(meta_data)
+
+    references.append(f"chromebooks_{execute_date}")
 
     items = [
         {"reference": ref, "data": d} for ref, d in zip(references, data, strict=True)

@@ -1,21 +1,33 @@
-## How to use this template
+# MBU Chromebooks MAC Adresser ATS
 
-The repository has been tagged as a template repository. This means you can create a new repository based on this code using the [GitHub instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
+---
 
+## 🔍 Overview
 
-### Alternative method: checkout the repository and remove git bindings
-Replace `<new-folder-name>` with your desired folder name:
-```sh
-git clone https://github.com/odense-rpa/process-template.git <new-folder-name>
+This project defines a Python-based Automation Server (ATS) process developed for Aarhus Kommune’s MBU automation platform.
+The robot automates a process fetches registered Chromebooks for Aarhus Kommune's customer id, and uploads the MAC adresse for each of them to a database.
 
-cd <new-folder-name>
+---
 
-rm -rf .git
-git init
-git add .
-git commit -m "Initial commit from process-template"
+## ⚙️ Main Responsibilities
+- Fetch registered Chromebooks
+- Retrieve the MAC adress, device ID, and the serial number for each chromebook
+- Upload data to specified table in RPA-database
 
-git remote add origin <new-repo-url>
-git push -u origin main
-```
+---
 
+## 🧠 How it works
+
+1. The robot is started in ATS
+2. Retrieves parameters from Constants-table
+3. Uses these to fetch list of Chromebooks, leveraging Googles API
+4. Retrieves specific data for each Chromebook
+5. Updates a database, containing all new and former registered Chromebooks
+
+---
+
+## 🧩 Structure
+
+- main.py – Entry point for all subflows
+- helpers/ – Shared utilities for ATS API, configs, and queue management
+- processes/ – Core logic for queue handling, item processing, and error management
